@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <style>
+        body {
+            width: 350px;
+            padding: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .api-section {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .hidden { display: none; }
+        textarea, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #1890ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background: #40a9ff; }
+        button:disabled { opacity: 0.6; }
+        #result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .real { background: #f6ffed; border: 1px solid #b7eb8f; }
+        .fake { background: #fff2f0; border: 1px solid #ffccc7; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 style="margin: 0;">Fake News Detector</h2>
+            <span style="float: right; cursor: pointer;" id="settingsToggle">⚙️</span>
+        </div>
+
+        <div id="apiSection" class="api-section hidden">
+            <h3 style="margin-top: 0;">API Settings</h3>
+            <input type="password" id="apiKey" placeholder="Enter your Google AI API key">
+            <button id="saveApiKey" style="margin-top: 10px;">Save API Key</button>
+        </div>
+
+        <div id="mainSection">
+            <textarea id="textInput" rows="6" placeholder="Enter text to analyze..."></textarea>
+            <button id="analyzeBtn" style="width: 100%; margin-top: 10px;">Analyze Text</button>
+            <div id="result" class="hidden"></div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
