@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultDiv = document.getElementById('result');
 
     chrome.storage.local.get(['GoogleApiKey'], (result) => {
-        if (!result.apiKey) {
+        if (!result.GoogleApiKey) {
             apiSection.classList.remove('hidden');
         }
     });
@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setLoading(true);
 
         try {
-            const { apiKey } = await chrome.storage.local.get(['GoogleApiKey']);
-            if (!apiKey) throw new Error('Please set up your API key first');
+            const { GoogleApiKey } = await chrome.storage.local.get(['GoogleApiKey']);
+            if (!GoogleApiKey) throw new Error('Please set up your API key first');
 
             const prompt = `For languages other than English, keep *all* parts of the response (the 'veracity', 'reasoning' and 'summary') in that detected language. For example, if the article is in Albanian, the 'reason' and 'summary' should be in Albanian.
                 Respond *only* with a JSON object, for new lines use backslash n and don't leave empty lines as it doesn't parse as a JSON. The JSON object *must* contain these four keys: 'veracity', 'reasoning' and 'summary'. Do not include any other text outside the JSON object.
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 The article is: "${text}"?`;
 
             const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GoogleApiKey}`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
