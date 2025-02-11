@@ -17,7 +17,7 @@ export const checkFakeNews = async (articleContent) => {
 };
 
 function getPrompt(articleContent) {
-    return `For languages other than English, keep *all* parts of the response (the 'veracity', 'reasoning' and20.9 'summary') in that detected language. For example, if the article is in Albanian, the 'reason' and 'summary' should be in Albanian.
+    return `For languages other than English, keep *all* parts of the response (the 'veracity', 'reasoning' and 'summary') in that detected language. For example, if the article is in Albanian, the 'reason' and 'summary' should be in Albanian.
         Respond *only* with a JSON object, for new lines use backslash n and don't leave empty lines as it doesn't parse as a JSON. The JSON object *must* contain these four keys: 'veracity', 'reasoning' and 'summary'. Do not include any other text outside the JSON object.
         The 'veracity' value should be one of the following strings: "Fake News", "Inconclusive", or "Real News".
         The 'reasoning' value should explain *specifically* why the text is classified as such, referencing concrete examples from the text and the search results. Clearly state what information was verified and how. Explain any discrepancies or inconsistencies found. If classified as "Inconclusive," explain what further information would be needed to make a definitive judgment. If classified as "Real News" or "Fake News," provide a concise explanation of the evidence supporting that conclusion. *This explanation must be in the same language as the provided text.*

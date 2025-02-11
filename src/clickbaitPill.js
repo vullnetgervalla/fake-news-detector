@@ -24,7 +24,7 @@ export const createLoadingPill = () => {
     return pill;
 };
 
-export const updatePillContent = (pill, isLoading, clickbaitResponse) => {
+export const updatePillContent = (pill, isLoading, clickbaitResponse, article) => {
     if (!clickbaitResponse || !clickbaitResponse.hasOwnProperty('clickbait')) {
         pill.innerHTML = '<span>Error</span>';
     }
@@ -52,7 +52,7 @@ export const updatePillContent = (pill, isLoading, clickbaitResponse) => {
         z-index: 9000;
         font-size: 12px;
         color: #333;
-        max-height: 275px;
+        max-height: 270px;
         overflow-y: auto;
         overflow-x: hidden;
         cursor: default;
@@ -109,7 +109,7 @@ export const updatePillContent = (pill, isLoading, clickbaitResponse) => {
                 e.stopPropagation();
                 checkButton.disabled = true;
                 checkButton.textContent = 'Checking...';
-                const fakeNewsResponse = await checkFakeNews(clickbaitResponse.articleLink);
+                const fakeNewsResponse = await checkFakeNews(article.content);
                 console.log(fakeNewsResponse)
                 updateFakeNewsTooltip(tooltip, fakeNewsResponse);
             });
@@ -135,30 +135,40 @@ function updateFakeNewsTooltip(tooltip, fakeNewsResponse) {
     const fakeNewsDiv = tooltip.querySelector('#FakeNewsDiv');
     if (fakeNewsResponse) {
         fakeNewsDiv.innerHTML = `
-            ${ `
             <div style="
                 margin-top: 10px;
                 padding-top: 10px;
                 border-top: 1px solid #eee;
             ">
-                <div style="font-weight: bold; line-height: 1.4; color: ${
-                    fakeNewsResponse.veracity === "Fake News" ? "#ff4d4f" :
-                    fakeNewsResponse.veracity === "Real News" ? "#52c41a" : "#faad14"
-                };">${fakeNewsResponse.veracity}</div>
-                <div style="margin-top: 4px; line-height: 1.4;">${fakeNewsResponse.reasoning}</div>
+                <div style="
+                    font-weight: bold;
+                    line-height: 1.6;
+                    color: ${
+                        fakeNewsResponse.veracity === "Fake News" ? "#ff4d4f" :
+                        fakeNewsResponse.veracity === "Real News" ? "#52c41a" : "#faad14"
+                    };
+                    text-align: center;
+                    font-size: 18px;
+                    padding: 8px 0;
+                    margin-bottom: 10px;
+                    border-radius: 6px;
+                    background-color: ${
+                        fakeNewsResponse.veracity === "Fake News" ? "#fff2f0" :
+                        fakeNewsResponse.veracity === "Real News" ? "#f6ffed" : "#fff7e6"
+                    };
+                ">${fakeNewsResponse.veracity}</div>
+                <div style="margin-top: 8px; line-height: 1.5;">${fakeNewsResponse.reasoning}</div>
                 ${fakeNewsResponse.sources ? `
-                <div style="margin-top: 8px;">
+                <div style="margin-top: 12px;">
                     <strong>Sources:</strong>
-                    <ol style="margin: 4px 0 0 20px; padding: 0; line-height: 1.4;">
+                    <ol style="margin: 6px 0 0 20px; padding: 0; line-height: 1.5;">
                         ${fakeNewsResponse.sources.map(source => `<li><a href="${source}" target="_blank">${source}</a></li>`).join('')}
                     </ol>
                 </div>
                 ` : ''}
             </div>
-            `}
         `;
     }
-
 }
 
 export const addSpinAnimation = () => {
