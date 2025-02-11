@@ -110,7 +110,6 @@ export const updatePillContent = (pill, isLoading, clickbaitResponse, article) =
                 checkButton.disabled = true;
                 checkButton.textContent = 'Checking...';
                 const fakeNewsResponse = await checkFakeNews(article.content);
-                console.log(fakeNewsResponse)
                 updateFakeNewsTooltip(tooltip, fakeNewsResponse);
             });
         }

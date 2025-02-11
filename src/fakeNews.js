@@ -1,11 +1,9 @@
 export const checkFakeNews = async (articleContent) => {
     const prompt = getPrompt(articleContent);
-    console.log(prompt)
     try {
         const model = window.currentModel;
         const result = await model.generateContent(prompt);
         const responseText = result.response.text();
-        console.log(responseText)
         return JSON.parse(responseText.replace(/```json\n|\n```/g, '').trim());
     } catch (error) {
         console.error('Error checking fake news:', error);

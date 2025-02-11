@@ -5,11 +5,9 @@ export const isClickbait = async (pill, text, articleLink) => {
     updatePillContent(pill, true);
     const article = await getArticleContent(articleLink);
     const prompt = getPrompt(text, article.content);
-    console.log(prompt)
     const model = window.currentModel;
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
-    console.log(responseText)
     try {
         const jsonStr = responseText.replace(/```json\n|\n```/g, '').trim();
         const response = JSON.parse(jsonStr);

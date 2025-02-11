@@ -2483,29 +2483,27 @@ var checkFakeNews = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           prompt = getPrompt(articleContent);
-          console.log(prompt);
-          _context.prev = 2;
+          _context.prev = 1;
           model = window.currentModel;
-          _context.next = 6;
+          _context.next = 5;
           return model.generateContent(prompt);
-        case 6:
+        case 5:
           result = _context.sent;
           responseText = result.response.text();
-          console.log(responseText);
           return _context.abrupt("return", JSON.parse(responseText.replace(/```json\n|\n```/g, '').trim()));
-        case 12:
-          _context.prev = 12;
-          _context.t0 = _context["catch"](2);
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](1);
           console.error('Error checking fake news:', _context.t0);
           return _context.abrupt("return", {
             veracity: 'Error',
             reasoning: 'Failed to analyze the article'
           });
-        case 16:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[2, 12]]);
+    }, _callee, null, [[1, 10]]);
   }));
   return function checkFakeNews(_x) {
     return _ref.apply(this, arguments);

@@ -2492,34 +2492,32 @@ var isClickbait = /*#__PURE__*/function () {
         case 3:
           article = _context.sent;
           prompt = getPrompt(text, article.content);
-          console.log(prompt);
           model = window.currentModel;
-          _context.next = 9;
+          _context.next = 8;
           return model.generateContent(prompt);
-        case 9:
+        case 8:
           result = _context.sent;
           responseText = result.response.text();
-          console.log(responseText);
-          _context.prev = 12;
+          _context.prev = 10;
           jsonStr = responseText.replace(/```json\n|\n```/g, '').trim();
           response = JSON.parse(jsonStr);
           Object.assign(response, {
             articleLink: articleLink
           });
           (0,_clickbaitPill__WEBPACK_IMPORTED_MODULE_0__.updatePillContent)(pill, false, response, article);
-          _context.next = 24;
+          _context.next = 22;
           break;
-        case 19:
-          _context.prev = 19;
-          _context.t0 = _context["catch"](12);
+        case 17:
+          _context.prev = 17;
+          _context.t0 = _context["catch"](10);
           console.error(_context.t0);
           (0,_clickbaitPill__WEBPACK_IMPORTED_MODULE_0__.updatePillContent)(pill, false, null);
           return _context.abrupt("return");
-        case 24:
+        case 22:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[12, 19]]);
+    }, _callee, null, [[10, 17]]);
   }));
   return function isClickbait(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
@@ -2585,9 +2583,8 @@ var updatePillContent = function updatePillContent(pill, isLoading, clickbaitRes
                 return (0,_fakeNews_js__WEBPACK_IMPORTED_MODULE_0__.checkFakeNews)(article.content);
               case 5:
                 fakeNewsResponse = _context.sent;
-                console.log(fakeNewsResponse);
                 updateFakeNewsTooltip(tooltip, fakeNewsResponse);
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -2652,29 +2649,27 @@ var checkFakeNews = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           prompt = getPrompt(articleContent);
-          console.log(prompt);
-          _context.prev = 2;
+          _context.prev = 1;
           model = window.currentModel;
-          _context.next = 6;
+          _context.next = 5;
           return model.generateContent(prompt);
-        case 6:
+        case 5:
           result = _context.sent;
           responseText = result.response.text();
-          console.log(responseText);
           return _context.abrupt("return", JSON.parse(responseText.replace(/```json\n|\n```/g, '').trim()));
-        case 12:
-          _context.prev = 12;
-          _context.t0 = _context["catch"](2);
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](1);
           console.error('Error checking fake news:', _context.t0);
           return _context.abrupt("return", {
             veracity: 'Error',
             reasoning: 'Failed to analyze the article'
           });
-        case 16:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[2, 12]]);
+    }, _callee, null, [[1, 10]]);
   }));
   return function checkFakeNews(_x) {
     return _ref.apply(this, arguments);
